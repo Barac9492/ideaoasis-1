@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IdeaOasis - 해외 아이디어 발굴 플랫폼{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oasis: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .idea-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-oasis-50 to-oasis-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-r from-oasis-500 to-oasis-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">🧠</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">IdeaOasis</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-700 hover:text-oasis-600 px-3 py-2 rounded-md text-sm font-medium">오늘의 아이디어</a>
+                    <a href="/archive" class="text-gray-700 hover:text-oasis-600 px-3 py-2 rounded-md text-sm font-medium">아카이브</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-500 text-sm">
+                <p>© 2024 IdeaOasis. 한국 창업자를 위한 해외 아이디어 발굴 플랫폼</p>
+                <p class="mt-2">매일 오전 6시, 새로운 해외 아이디어를 만나보세요</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Common JavaScript functions
+        function vote(ideaId, voteType) {
+            fetch(`/vote/${ideaId}/${voteType}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update vote counts on the page
+                    const upvoteElement = document.getElementById('upvotes');
+                    const downvoteElement = document.getElementById('downvotes');
+                    if (upvoteElement) upvoteElement.textContent = data.upvotes;
+                    if (downvoteElement) downvoteElement.textContent = data.downvotes;
+                    
+                    // Visual feedback
+                    const button = event.target;
+                    button.classList.add('bg-oasis-500', 'text-white');
+                    setTimeout(() => {
+                        button.classList.remove('bg-oasis-500', 'text-white');
+                    }, 200);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html> 

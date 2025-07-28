@@ -3,120 +3,130 @@
 {% block title %}아이디어 아카이브 - IdeaOasis{% endblock %}
 
 {% block content %}
-<div class="space-y-8">
-    <!-- Header -->
-    <div class="text-center">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">아이디어 아카이브</h1>
-        <p class="text-lg text-gray-600">지난 30일간 발굴된 해외 아이디어들을 확인해보세요</p>
-    </div>
+<!-- Hero Section -->
+<section class="hero">
+    <h1>아이디어 아카이브</h1>
+    <p>과거에 발굴된 모든 창업 아이디어를 둘러보세요</p>
+</section>
 
+<!-- Main Content -->
+<div class="main-content">
     {% if ideas %}
-    <!-- Ideas Grid -->
-    <div class="grid gap-6">
-        {% for idea in ideas %}
-        <div class="idea-card rounded-xl shadow-lg p-6 border border-gray-200">
-            <!-- Idea Header -->
-            <div class="flex items-start justify-between mb-4">
-                <div class="flex-1">
-                    <div class="flex items-center space-x-3 mb-2">
-                        <span class="text-xl">💡</span>
-                        <h2 class="text-xl font-bold text-gray-900">{{ idea.idea_title }}</h2>
-                    </div>
-                    <div class="flex items-center space-x-4 text-sm text-gray-500">
-                        <span>{{ idea.published_at.strftime('%Y년 %m월 %d일') }}</span>
-                        <span class="px-2 py-1 bg-oasis-100 text-oasis-800 rounded-full text-xs">
-                            {{ idea.source_type.upper() }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Idea Content Preview -->
-            <div class="prose prose-sm max-w-none mb-4">
-                {% set summary_lines = idea.summary_kr.split('\n') %}
-                {% for line in summary_lines[:6] %}
-                    {% if line.strip() %}
-                        <p class="text-gray-700">{{ line }}</p>
-                    {% endif %}
-                {% endfor %}
-                {% if summary_lines|length > 6 %}
-                    <p class="text-gray-500 italic">...</p>
-                {% endif %}
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                <div class="flex items-center space-x-4">
-                    <button 
-                        onclick="vote({{ idea.id }}, 'up')"
-                        class="flex items-center space-x-2 px-3 py-1 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition-colors text-sm"
-                    >
-                        <span>👍</span>
-                        <span id="upvotes-{{ idea.id }}">0</span>
-                    </button>
-                    <button 
-                        onclick="vote({{ idea.id }}, 'down')"
-                        class="flex items-center space-x-2 px-3 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors text-sm"
-                    >
-                        <span>👎</span>
-                        <span id="downvotes-{{ idea.id }}">0</span>
-                    </button>
-                </div>
-                
-                <a 
-                    href="{{ idea.source_url }}" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center px-3 py-1 bg-oasis-600 text-white rounded-md hover:bg-oasis-700 transition-colors text-sm"
-                >
-                    <span>원문 보기</span>
-                    <svg class="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                </a>
-            </div>
+        <!-- Archive Header -->
+        <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; margin-bottom: 8px; color: #1d1d1f;">발굴된 아이디어들</h2>
+            <p style="color: #86868b; font-size: 17px;">총 {{ ideas|length }}개의 아이디어가 있습니다</p>
         </div>
-        {% endfor %}
-    </div>
 
-    <!-- Pagination Info -->
-    <div class="text-center text-gray-500 text-sm">
-        <p>총 {{ ideas|length }}개의 아이디어가 아카이브에 저장되어 있습니다</p>
-    </div>
+        <!-- Ideas Grid -->
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+            {% for idea in ideas %}
+            <div class="card" style="padding: 24px;">
+                {% if demo_mode %}
+                    <div class="demo-badge">DEMO MODE</div>
+                {% endif %}
+                
+                <!-- Idea Header -->
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <h3 style="font-size: 20px; color: #1d1d1f; line-height: 1.3;">{{ idea.idea_title }}</h3>
+                        <div style="display: flex; gap: 6px;">
+                            <span style="padding: 4px 8px; background: #007aff; color: white; border-radius: 8px; font-size: 10px; font-weight: 500;">
+                                {{ idea.source_type.upper() }}
+                            </span>
+                            {% if idea.category %}
+                            <span style="padding: 4px 8px; background: #34c759; color: white; border-radius: 8px; font-size: 10px; font-weight: 500;">
+                                {{ idea.category.upper() }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p style="color: #86868b; font-size: 14px;">
+                        {{ idea.published_at.strftime('%Y년 %m월 %d일') }}
+                    </p>
+                </div>
+
+                <!-- Idea Preview -->
+                <div style="margin-bottom: 16px;">
+                    <p style="color: #1d1d1f; font-size: 15px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ idea.summary_kr[:200] }}...
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a 
+                        href="{{ idea.source_url }}" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="btn btn-secondary"
+                        style="padding: 8px 16px; font-size: 14px;"
+                    >
+                        <span>원문 보기</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                    
+                    <div class="vote-buttons" style="gap: 8px;">
+                        <button 
+                            onclick="vote({{ idea.id }}, 'up')"
+                            class="vote-btn up"
+                            style="padding: 6px 12px; font-size: 13px;"
+                        >
+                            <span>👍</span>
+                            <span id="upvotes-{{ idea.id }}">0</span>
+                        </button>
+                        <button 
+                            onclick="vote({{ idea.id }}, 'down')"
+                            class="vote-btn down"
+                            style="padding: 6px 12px; font-size: 13px;"
+                        >
+                            <span>👎</span>
+                            <span id="downvotes-{{ idea.id }}">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
     {% else %}
-    <!-- No Archived Ideas -->
-    <div class="text-center py-12">
-        <div class="mb-6">
-            <span class="text-6xl">📚</span>
+        <!-- No Ideas Available -->
+        <div class="card" style="text-align: center; padding: 80px 40px;">
+            <div style="margin-bottom: 32px;">
+                <span style="font-size: 64px;">📚</span>
+            </div>
+            <h2 style="font-size: 32px; margin-bottom: 16px; color: #1d1d1f;">아직 아카이브된 아이디어가 없습니다</h2>
+            <p style="color: #86868b; font-size: 18px; margin-bottom: 32px; line-height: 1.6;">
+                매일 새로운 아이디어가 발굴되면 여기에 저장됩니다.<br>
+                잠시 후 다시 확인해보세요.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <a href="/" class="btn btn-primary">
+                    홈으로 돌아가기
+                </a>
+                <button 
+                    onclick="location.reload()"
+                    class="btn btn-secondary"
+                >
+                    새로고침
+                </button>
+            </div>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">아카이브된 아이디어가 없습니다</h2>
-        <p class="text-gray-600 mb-6">
-            아직 아카이브된 아이디어가 없습니다.<br>
-            매일 오전 6시에 새로운 아이디어가 추가됩니다.
-        </p>
-        <a href="/" class="inline-flex items-center px-4 py-2 bg-oasis-600 text-white rounded-lg hover:bg-oasis-700 transition-colors">
-            오늘의 아이디어 보기
-        </a>
-    </div>
     {% endif %}
 
-    <!-- Archive Info -->
-    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
-        <div class="flex items-start space-x-3">
-            <div class="flex-shrink-0">
-                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-                </svg>
-            </div>
-            <div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">아카이브 정책</h3>
-                <p class="text-gray-700">
-                    아이디어는 발굴 후 24시간 동안 메인 페이지에 표시되며, 이후 자동으로 아카이브로 이동됩니다. 
-                    아카이브된 아이디어는 30일간 보관되며, 투표 기능도 계속 이용할 수 있습니다.
-                </p>
-            </div>
-        </div>
+    <!-- Call to Action -->
+    <div class="card" style="text-align: center; background: #f5f5f7; border: 1px solid rgba(0, 0, 0, 0.1); margin-top: 40px;">
+        <h2 style="font-size: 24px; margin-bottom: 12px; color: #1d1d1f;">더 많은 아이디어를 원하시나요?</h2>
+        <p style="color: #86868b; font-size: 17px; margin-bottom: 24px;">
+            매일 새로운 해외 아이디어로 창업 영감을 얻어보세요
+        </p>
+        <a href="/" class="btn btn-primary">
+            오늘의 아이디어 보기
+        </a>
     </div>
 </div>
 {% endblock %} 

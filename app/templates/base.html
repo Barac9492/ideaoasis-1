@@ -3,78 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}IdeaOasis - 해외 아이디어 발굴 플랫폼{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        oasis: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        }
-                    }
-                }
+    <title>{% block title %}IdeaOasis{% endblock %}</title>
+    
+    <!-- Apple-style CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 44px;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #007aff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            margin-top: 44px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #007aff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056cc;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 122, 255, 0.1);
+            color: #007aff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 122, 255, 0.2);
+        }
+
+        .btn-success {
+            background: #34c759;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #28a745;
+        }
+
+        .btn-danger {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc3545;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: 48px; }
+        h2 { font-size: 40px; }
+        h3 { font-size: 32px; }
+        h4 { font-size: 24px; }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        /* Features */
+        .features {
+            background: #f5f5f7;
+            padding: 80px 20px;
+            margin: 80px 0;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        .feature-description {
+            color: #86868b;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1d1d1f;
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            color: #86868b;
+            font-size: 17px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 20px; }
+            .nav-menu { display: none; }
+            .card { padding: 24px; }
+            .main-content { padding: 40px 20px; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    </script>
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
-        .idea-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
+
+        /* Vote buttons */
+        .vote-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .vote-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .vote-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .vote-btn.up:hover {
+            background: #34c759;
+            color: white;
+            border-color: #34c759;
+        }
+
+        .vote-btn.down:hover {
+            background: #ff3b30;
+            color: white;
+            border-color: #ff3b30;
+        }
+
+        /* Idea content styling */
+        .idea-content {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #1d1d1f;
+        }
+
+        .idea-content h3 {
+            font-size: 24px;
+            margin: 24px 0 12px;
+            color: #1d1d1f;
+        }
+
+        .idea-content ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .idea-content li {
+            margin: 8px 0;
+        }
+
+        /* Demo badge */
+        .demo-badge {
+            display: inline-block;
+            background: #007aff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 16px;
         }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-oasis-50 to-oasis-100">
+<body>
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-gradient-to-r from-oasis-500 to-oasis-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">🧠</span>
-                        </div>
-                        <span class="text-xl font-bold text-gray-900">IdeaOasis</span>
-                    </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="/" class="text-gray-700 hover:text-oasis-600 px-3 py-2 rounded-md text-sm font-medium">오늘의 아이디어</a>
-                    <a href="/archive" class="text-gray-700 hover:text-oasis-600 px-3 py-2 rounded-md text-sm font-medium">아카이브</a>
-                </div>
-            </div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">IdeaOasis</a>
+            <ul class="nav-menu">
+                <li><a href="/">오늘의 아이디어</a></li>
+                <li><a href="/archive">아카이브</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main>
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-16">
-        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-gray-500 text-sm">
-                <p>© 2024 IdeaOasis. 한국 창업자를 위한 해외 아이디어 발굴 플랫폼</p>
-                <p class="mt-2">매일 오전 6시, 새로운 해외 아이디어를 만나보세요</p>
-            </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 IdeaOasis. 한국 창업자를 위한 해외 아이디어 발굴 플랫폼</p>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Common JavaScript functions
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Vote functionality
         function vote(ideaId, voteType) {
             fetch(`/vote/${ideaId}/${voteType}`, {
                 method: 'POST',
@@ -85,24 +390,47 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Update vote counts on the page
-                    const upvoteElement = document.getElementById('upvotes');
-                    const downvoteElement = document.getElementById('downvotes');
-                    if (upvoteElement) upvoteElement.textContent = data.upvotes;
-                    if (downvoteElement) downvoteElement.textContent = data.downvotes;
+                    // Update vote counts
+                    const upvotesElement = document.getElementById('upvotes');
+                    const downvotesElement = document.getElementById('downvotes');
+                    
+                    if (upvotesElement && downvotesElement) {
+                        upvotesElement.textContent = data.upvotes || upvotesElement.textContent;
+                        downvotesElement.textContent = data.downvotes || downvotesElement.textContent;
+                    }
                     
                     // Visual feedback
-                    const button = event.target;
-                    button.classList.add('bg-oasis-500', 'text-white');
-                    setTimeout(() => {
-                        button.classList.remove('bg-oasis-500', 'text-white');
-                    }, 200);
+                    const button = event.target.closest('.vote-btn');
+                    if (button) {
+                        button.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            button.style.transform = 'scale(1)';
+                        }, 200);
+                    }
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
+
+        // Add fade-in animation to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .feature-card').forEach(card => {
+            observer.observe(card);
+        });
     </script>
 </body>
 </html> 

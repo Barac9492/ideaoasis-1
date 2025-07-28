@@ -3,137 +3,175 @@
 {% block title %}오늘의 아이디어 - IdeaOasis{% endblock %}
 
 {% block content %}
-<div class="space-y-8">
-    <!-- Header -->
-    <div class="text-center">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">오늘의 해외 아이디어</h1>
-        <p class="text-lg text-gray-600">매일 아침 6시, 새로운 창업 아이디어를 만나보세요</p>
-    </div>
+<!-- Hero Section -->
+<section class="hero">
+    <h1>오늘의 해외 아이디어</h1>
+    <p>매일 아침 6시, 새로운 창업 아이디어를 만나보세요</p>
+</section>
 
+<!-- Main Content -->
+<div class="main-content">
     {% if idea %}
-    <!-- Today's Idea Card (mimicking ideabrowser.com style) -->
-    <div class="idea-card rounded-2xl shadow-xl p-8 border border-gray-200">
-        <!-- Idea Header -->
-        <div class="mb-6">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center space-x-3">
-                    <span class="text-2xl">💡</span>
-                    <h2 class="text-2xl font-bold text-gray-900">{{ idea.idea_title }}</h2>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span class="px-3 py-1 bg-oasis-100 text-oasis-800 rounded-full text-sm font-medium">
-                        {{ idea.source_type.upper() }}
-                    </span>
-                    {% if idea.category %}
-                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                        {{ idea.category.upper() }}
-                    </span>
-                    {% endif %}
-                </div>
-            </div>
-            <p class="text-gray-500 text-sm">
-                {{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨
-            </p>
-        </div>
-
-        <!-- Idea Content (mimicking ideabrowser.com structure) -->
-        <div class="prose prose-lg max-w-none">
-            {{ idea.summary_kr | safe }}
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="mt-8 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <button 
-                    onclick="vote({{ idea.id }}, 'up')"
-                    class="flex items-center space-x-2 px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
-                >
-                    <span>👍</span>
-                    <span id="upvotes">{{ upvotes }}</span>
-                </button>
-                <button 
-                    onclick="vote({{ idea.id }}, 'down')"
-                    class="flex items-center space-x-2 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
-                >
-                    <span>👎</span>
-                    <span id="downvotes">{{ downvotes }}</span>
-                </button>
-            </div>
+        <!-- Today's Idea Card -->
+        <div class="card">
+            {% if demo_mode %}
+                <div class="demo-badge">DEMO MODE</div>
+            {% endif %}
             
-            <a 
-                href="{{ idea.source_url }}" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 bg-oasis-600 text-white rounded-lg hover:bg-oasis-700 transition-colors"
-            >
-                <span>원문 보기</span>
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-            </a>
-        </div>
-    </div>
+            <!-- Idea Header -->
+            <div style="margin-bottom: 32px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                    <div>
+                        <h2 style="font-size: 32px; margin-bottom: 8px; color: #1d1d1f;">{{ idea.idea_title }}</h2>
+                        <p style="color: #86868b; font-size: 17px;">
+                            {{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <span style="padding: 6px 12px; background: #007aff; color: white; border-radius: 12px; font-size: 12px; font-weight: 500;">
+                            {{ idea.source_type.upper() }}
+                        </span>
+                        {% if idea.category %}
+                        <span style="padding: 6px 12px; background: #34c759; color: white; border-radius: 12px; font-size: 12px; font-weight: 500;">
+                            {{ idea.category.upper() }}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
-    <!-- Info Box (mimicking ideabrowser.com style) -->
-    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <div class="flex items-start space-x-3">
-            <div class="flex-shrink-0">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+            <!-- Idea Content -->
+            <div class="idea-content">
+                {{ idea.summary_kr | safe }}
             </div>
-            <div>
-                <h3 class="text-lg font-medium text-blue-900 mb-2">이 아이디어에 대해</h3>
-                <p class="text-blue-700">
-                    이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
-                    한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
-                </p>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+                <div class="vote-buttons">
+                    <button 
+                        onclick="vote({{ idea.id }}, 'up')"
+                        class="vote-btn up"
+                    >
+                        <span>👍</span>
+                        <span id="upvotes">{{ upvotes }}</span>
+                    </button>
+                    <button 
+                        onclick="vote({{ idea.id }}, 'down')"
+                        class="vote-btn down"
+                    >
+                        <span>👎</span>
+                        <span id="downvotes">{{ downvotes }}</span>
+                    </button>
+                </div>
+                
+                <a 
+                    href="{{ idea.source_url }}" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="btn btn-primary"
+                >
+                    <span>원문 보기</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
             </div>
         </div>
-    </div>
+
+        <!-- Info Box -->
+        <div class="card" style="background: #f5f5f7; border: 1px solid rgba(0, 0, 0, 0.1);">
+            <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <div style="flex-shrink: 0;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h3 style="font-size: 20px; margin-bottom: 8px; color: #1d1d1f;">이 아이디어에 대해</h3>
+                    <p style="color: #86868b; font-size: 17px; line-height: 1.5;">
+                        이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
+                        한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
 
     {% else %}
-    <!-- No Idea Available -->
-    <div class="text-center py-12">
-        <div class="mb-6">
-            <span class="text-6xl">🤔</span>
+        <!-- No Idea Available -->
+        <div class="card" style="text-align: center; padding: 80px 40px;">
+            <div style="margin-bottom: 32px;">
+                <span style="font-size: 64px;">🤔</span>
+            </div>
+            <h2 style="font-size: 32px; margin-bottom: 16px; color: #1d1d1f;">오늘의 아이디어가 아직 준비되지 않았습니다</h2>
+            <p style="color: #86868b; font-size: 18px; margin-bottom: 32px; line-height: 1.6;">
+                매일 오전 6시에 새로운 아이디어가 업데이트됩니다.<br>
+                잠시 후 다시 확인해보세요.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <a href="/archive" class="btn btn-primary">
+                    과거 아이디어 보기
+                </a>
+                <button 
+                    onclick="location.reload()"
+                    class="btn btn-secondary"
+                >
+                    새로고침
+                </button>
+            </div>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">오늘의 아이디어가 아직 준비되지 않았습니다</h2>
-        <p class="text-gray-600 mb-6">
-            매일 오전 6시에 새로운 아이디어가 업데이트됩니다.<br>
-            잠시 후 다시 확인해보세요.
-        </p>
-        <div class="flex justify-center space-x-4">
-            <a href="/archive" class="inline-flex items-center px-4 py-2 bg-oasis-600 text-white rounded-lg hover:bg-oasis-700 transition-colors">
-                과거 아이디어 보기
-            </a>
-            <button 
-                onclick="location.reload()"
-                class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-            >
-                새로고침
-            </button>
-        </div>
-    </div>
     {% endif %}
 
-    <!-- Features (mimicking ideabrowser.com style) -->
-    <div class="grid md:grid-cols-3 gap-6 mt-12">
-        <div class="bg-white rounded-lg p-6 shadow-md">
-            <div class="text-3xl mb-4">🌍</div>
-            <h3 class="text-lg font-semibold mb-2">글로벌 아이디어</h3>
-            <p class="text-gray-600">IdeaBrowser.com, Hacker News, Product Hunt 등 해외 커뮤니티에서 수집된 신선한 아이디어</p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 40px; margin-bottom: 16px; color: #1d1d1f;">왜 IdeaOasis인가요?</h2>
+                <p style="color: #86868b; font-size: 18px; max-width: 600px; margin: 0 auto;">
+                    한국 창업자들을 위해 특별히 설계된 아이디어 발굴 플랫폼
+                </p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">글로벌 아이디어</h3>
+                    <p class="feature-description">
+                        IdeaBrowser.com, Hacker News, Product Hunt 등 해외 커뮤니티에서 수집된 신선한 아이디어
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI 번역</h3>
+                    <p class="feature-description">
+                        GPT-4를 활용한 고품질 한국어 번역 및 한국 시장 적용 방안 제시
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">매일 업데이트</h3>
+                    <p class="feature-description">
+                        매일 오전 6시, 새로운 아이디어로 창업 영감을 얻어보세요
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="bg-white rounded-lg p-6 shadow-md">
-            <div class="text-3xl mb-4">🤖</div>
-            <h3 class="text-lg font-semibold mb-2">AI 번역</h3>
-            <p class="text-gray-600">GPT-4를 활용한 고품질 한국어 번역 및 한국 시장 적용 방안 제시</p>
-        </div>
-        <div class="bg-white rounded-lg p-6 shadow-md">
-            <div class="text-3xl mb-4">⚡</div>
-            <h3 class="text-lg font-semibold mb-2">매일 업데이트</h3>
-            <p class="text-gray-600">매일 오전 6시, 새로운 아이디어로 창업 영감을 얻어보세요</p>
-        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <h2 style="font-size: 32px; margin-bottom: 16px;">창업 아이디어를 찾고 계신가요?</h2>
+        <p style="font-size: 18px; margin-bottom: 32px; opacity: 0.9;">
+            매일 새로운 해외 아이디어로 창업 영감을 얻어보세요
+        </p>
+        <a href="/archive" class="btn" style="background: white; color: #1d1d1f; font-weight: 600;">
+            아카이브 둘러보기
+        </a>
     </div>
 </div>
 {% endblock %} 

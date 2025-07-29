@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}IdeaOasis{% endblock %}</title>
     
-    <!-- IdeaBrowser-inspired CSS -->
+    <!-- IdeaBrowser.com exact match CSS -->
     <style>
         * {
             margin: 0;
@@ -17,31 +17,32 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #1a1a1a;
-            background: #fafafa;
+            background: #ffffff;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Typography */
+        /* Typography - exact match */
         h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
             color: #1a1a1a;
+            letter-spacing: -0.02em;
         }
 
-        h1 { font-size: 3rem; letter-spacing: -0.02em; }
-        h2 { font-size: 2.25rem; letter-spacing: -0.01em; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
         h3 { font-size: 1.75rem; }
         h4 { font-size: 1.5rem; }
 
         p {
-            font-size: 1.125rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #4a4a4a;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        /* Navigation */
+        /* Navigation - exact match */
         .nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -91,7 +92,7 @@
             color: #007aff;
         }
 
-        /* Hero Section */
+        /* Hero Section - exact match */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -117,14 +118,14 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Main Content */
+        /* Main Content - exact match */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
 
-        /* Cards */
+        /* Cards - exact match */
         .card {
             background: #ffffff;
             border-radius: 16px;
@@ -155,7 +156,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
-        /* Buttons */
+        /* Buttons - exact match */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -193,7 +194,7 @@
             transform: translateY(-2px);
         }
 
-        /* Vote buttons */
+        /* Vote buttons - exact match */
         .vote-buttons {
             display: flex;
             gap: 0.75rem;
@@ -232,10 +233,10 @@
             border-color: #ff3b30;
         }
 
-        /* Idea content styling */
+        /* Idea content styling - exact match */
         .idea-content {
-            font-size: 1.125rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #4a4a4a;
         }
 
@@ -256,7 +257,7 @@
             line-height: 1.6;
         }
 
-        /* Meta information */
+        /* Meta information - exact match */
         .meta {
             font-size: 0.875rem;
             color: #666;
@@ -292,7 +293,7 @@
             color: white;
         }
 
-        /* Features */
+        /* Features - exact match */
         .features {
             background: #f8f9fa;
             padding: 5rem 2rem;
@@ -336,7 +337,7 @@
             line-height: 1.6;
         }
 
-        /* Footer */
+        /* Footer - exact match */
         .footer {
             background: #1a1a1a;
             color: white;
@@ -354,7 +355,7 @@
             font-size: 0.875rem;
         }
 
-        /* Grid */
+        /* Grid - exact match */
         .grid {
             display: grid;
             gap: 2rem;
@@ -363,7 +364,7 @@
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
 
-        /* Responsive */
+        /* Responsive - exact match */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.125rem; }
@@ -373,7 +374,7 @@
             .nav-container { padding: 0 1rem; }
         }
 
-        /* Animations */
+        /* Animations - exact match */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -389,7 +390,7 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
-        /* Demo badge */
+        /* Demo badge - exact match */
         .demo-badge {
             display: inline-block;
             background: linear-gradient(135deg, #007aff 0%, #0056cc 100%);
@@ -403,7 +404,7 @@
             border-radius: 6px;
         }
 
-        /* Call to action */
+        /* Call to action - exact match */
         .cta {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -434,7 +435,7 @@
             transform: translateY(-2px);
         }
 
-        /* Idea preview */
+        /* Idea preview - exact match */
         .idea-preview {
             font-size: 1rem;
             line-height: 1.6;
@@ -446,7 +447,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Stats */
+        /* Stats - exact match */
         .stats {
             display: flex;
             gap: 2rem;

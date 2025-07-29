@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}IdeaOasis{% endblock %}</title>
     
-    <!-- IdeaBrowser.com exact match CSS -->
+    <!-- IdeaBrowser.com inspired CSS -->
     <style>
         * {
             margin: 0;
@@ -22,7 +22,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Typography - exact match */
+        /* Typography */
         h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
@@ -42,7 +42,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Navigation - exact match */
+        /* Navigation */
         .nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -92,7 +92,7 @@
             color: #007aff;
         }
 
-        /* Hero Section - exact match */
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -118,20 +118,39 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Main Content - exact match */
+        /* Main Content */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
 
-        /* Cards - exact match */
+        /* Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Cards */
         .card {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             padding: 2.5rem;
-            margin-bottom: 2rem;
             border: 1px solid rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
@@ -156,7 +175,67 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
-        /* Buttons - exact match */
+        /* Metrics Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card.opportunity {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .metric-card.problem {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .metric-card.feasibility {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .metric-card.timing {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .metric-description {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -194,7 +273,7 @@
             transform: translateY(-2px);
         }
 
-        /* Vote buttons - exact match */
+        /* Vote buttons */
         .vote-buttons {
             display: flex;
             gap: 0.75rem;
@@ -233,7 +312,7 @@
             border-color: #ff3b30;
         }
 
-        /* Idea content styling - exact match */
+        /* Idea content styling */
         .idea-content {
             font-size: 1rem;
             line-height: 1.6;
@@ -257,7 +336,7 @@
             line-height: 1.6;
         }
 
-        /* Meta information - exact match */
+        /* Meta information */
         .meta {
             font-size: 0.875rem;
             color: #666;
@@ -293,7 +372,70 @@
             color: white;
         }
 
-        /* Features - exact match */
+        .tag.warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        /* Business metrics */
+        .business-metrics {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .business-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .business-metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .metric-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .metric-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.875rem;
+        }
+
+        .metric-subtitle {
+            font-size: 0.75rem;
+            color: #666;
+            max-width: 200px;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: #007aff;
+        }
+
+        /* Features */
         .features {
             background: #f8f9fa;
             padding: 5rem 2rem;
@@ -337,7 +479,7 @@
             line-height: 1.6;
         }
 
-        /* Footer - exact match */
+        /* Footer */
         .footer {
             background: #1a1a1a;
             color: white;
@@ -355,7 +497,7 @@
             font-size: 0.875rem;
         }
 
-        /* Grid - exact match */
+        /* Grid */
         .grid {
             display: grid;
             gap: 2rem;
@@ -364,7 +506,17 @@
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
 
-        /* Responsive - exact match */
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.125rem; }
@@ -372,9 +524,12 @@
             .card { padding: 1.5rem; }
             .main-content { padding: 2rem 1rem; }
             .nav-container { padding: 0 1rem; }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Animations - exact match */
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -390,7 +545,7 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
-        /* Demo badge - exact match */
+        /* Demo badge */
         .demo-badge {
             display: inline-block;
             background: linear-gradient(135deg, #007aff 0%, #0056cc 100%);
@@ -404,7 +559,7 @@
             border-radius: 6px;
         }
 
-        /* Call to action - exact match */
+        /* Call to action */
         .cta {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -435,7 +590,7 @@
             transform: translateY(-2px);
         }
 
-        /* Idea preview - exact match */
+        /* Idea preview */
         .idea-preview {
             font-size: 1rem;
             line-height: 1.6;
@@ -447,7 +602,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Stats - exact match */
+        /* Stats */
         .stats {
             display: flex;
             gap: 2rem;
@@ -550,7 +705,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.card, .feature-card, .idea-card').forEach(card => {
+        document.querySelectorAll('.card, .feature-card, .idea-card, .metric-card').forEach(card => {
             observer.observe(card);
         });
     </script>

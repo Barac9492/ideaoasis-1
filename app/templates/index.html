@@ -12,78 +12,212 @@
 <!-- Main Content -->
 <div class="main-content">
     {% if idea %}
-        <!-- Today's Idea Card -->
-        <div class="card">
-            {% if demo_mode %}
-                <div class="demo-badge">DEMO MODE</div>
-            {% endif %}
-            
-            <!-- Meta Information -->
-            <div class="meta">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <p style="margin-bottom: 0.5rem;">{{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨</p>
-                        <p style="margin-bottom: 0;">출처: {{ idea.source_type.upper() }}</p>
-                    </div>
-                    <div class="tags">
-                        <span class="tag primary">{{ idea.source_type.upper() }}</span>
-                        {% if idea.category %}
-                        <span class="tag success">{{ idea.category.upper() }}</span>
-                        {% endif %}
-                    </div>
-                </div>
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card opportunity">
+                <div class="metric-value">8</div>
+                <div class="metric-label">기회</div>
+                <div class="metric-description">강한 시장 기회</div>
             </div>
-
-            <!-- Idea Title -->
-            <h2>{{ idea.idea_title }}</h2>
-
-            <!-- Idea Content -->
-            <div class="idea-content">
-                {{ idea.summary_kr | safe }}
+            <div class="metric-card problem">
+                <div class="metric-value">8</div>
+                <div class="metric-label">문제</div>
+                <div class="metric-description">높은 고통 지수</div>
             </div>
-
-            <!-- Action Buttons -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
-                <div class="vote-buttons">
-                    <button 
-                        onclick="vote({{ idea.id }}, 'up')"
-                        class="vote-btn up"
-                    >
-                        <span>👍</span>
-                        <span id="upvotes">{{ upvotes }}</span>
-                    </button>
-                    <button 
-                        onclick="vote({{ idea.id }}, 'down')"
-                        class="vote-btn down"
-                    >
-                        <span>👎</span>
-                        <span id="downvotes">{{ downvotes }}</span>
-                    </button>
-                </div>
-                
-                <a 
-                    href="{{ idea.source_url }}" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="btn btn-primary"
-                >
-                    <span>원문 보기</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                </a>
+            <div class="metric-card feasibility">
+                <div class="metric-value">6</div>
+                <div class="metric-label">실행 가능성</div>
+                <div class="metric-description">도전적이지만 가능</div>
+            </div>
+            <div class="metric-card timing">
+                <div class="metric-value">9</div>
+                <div class="metric-label">타이밍</div>
+                <div class="metric-description">완벽한 타이밍</div>
             </div>
         </div>
 
-        <!-- Info Box -->
-        <div class="card" style="background: #f8f9fa; border: 1px solid rgba(0, 0, 0, 0.06);">
-            <h3>이 아이디어에 대해</h3>
-            <p style="margin-bottom: 0;">
-                이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
-                한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
-            </p>
+        <!-- Grid Layout -->
+        <div class="grid-layout">
+            <!-- Main Section -->
+            <div class="main-section">
+                <!-- Idea Card -->
+                <div class="card">
+                    {% if demo_mode %}
+                        <div class="demo-badge">DEMO MODE</div>
+                    {% endif %}
+                    
+                    <!-- Meta Information -->
+                    <div class="meta">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="margin-bottom: 0.5rem;">{{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨</p>
+                                <p style="margin-bottom: 0;">출처: {{ idea.source_type.upper() }}</p>
+                            </div>
+                            <div class="tags">
+                                <span class="tag primary">{{ idea.source_type.upper() }}</span>
+                                {% if idea.category %}
+                                <span class="tag success">{{ idea.category.upper() }}</span>
+                                {% endif %}
+                                <span class="tag warning">완벽한 타이밍</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Idea Title -->
+                    <h2>{{ idea.idea_title }}</h2>
+
+                    <!-- Idea Content -->
+                    <div class="idea-content">
+                        {{ idea.summary_kr | safe }}
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
+                        <div class="vote-buttons">
+                            <button 
+                                onclick="vote({{ idea.id }}, 'up')"
+                                class="vote-btn up"
+                            >
+                                <span>👍</span>
+                                <span id="upvotes">{{ upvotes }}</span>
+                            </button>
+                            <button 
+                                onclick="vote({{ idea.id }}, 'down')"
+                                class="vote-btn down"
+                            >
+                                <span>👎</span>
+                                <span id="downvotes">{{ downvotes }}</span>
+                            </button>
+                        </div>
+                        
+                        <a 
+                            href="{{ idea.source_url }}" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="btn btn-primary"
+                        >
+                            <span>원문 보기</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="card" style="background: #f8f9fa; border: 1px solid rgba(0, 0, 0, 0.06);">
+                    <h3>이 아이디어에 대해</h3>
+                    <p style="margin-bottom: 0;">
+                        이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
+                        한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Business Metrics -->
+                <div class="business-metrics">
+                    <h3 style="margin-bottom: 1.5rem;">비즈니스 적합성</h3>
+                    <div class="business-metric">
+                        <div class="metric-info">
+                            <div class="metric-icon" style="background: #10b981; color: white;">💰</div>
+                            <div class="metric-text">
+                                <div class="metric-title">수익 잠재력</div>
+                                <div class="metric-subtitle">$1M-$10M ARR 잠재력</div>
+                            </div>
+                        </div>
+                        <div class="metric-value">$$$</div>
+                    </div>
+                    <div class="business-metric">
+                        <div class="metric-info">
+                            <div class="metric-icon" style="background: #3b82f6; color: white;">🛠️</div>
+                            <div class="metric-text">
+                                <div class="metric-title">실행 난이도</div>
+                                <div class="metric-subtitle">표준 통합, 3개월 MVP</div>
+                            </div>
+                        </div>
+                        <div class="metric-value">5/10</div>
+                    </div>
+                    <div class="business-metric">
+                        <div class="metric-info">
+                            <div class="metric-icon" style="background: #f59e0b; color: white;">🚀</div>
+                            <div class="metric-text">
+                                <div class="metric-title">시장 진입</div>
+                                <div class="metric-subtitle">Reddit, Facebook, YouTube에서 명확한 트랙션</div>
+                            </div>
+                        </div>
+                        <div class="metric-value">8/10</div>
+                    </div>
+                    <div class="business-metric">
+                        <div class="metric-info">
+                            <div class="metric-icon" style="background: #8b5cf6; color: white;">🧠</div>
+                            <div class="metric-text">
+                                <div class="metric-title">창업자 적합성</div>
+                                <div class="metric-subtitle">SaaS 및 솔로프레너십 경험</div>
+                            </div>
+                        </div>
+                        <div class="metric-value">
+                            <a href="#" style="color: #007aff; text-decoration: none;">확인하기 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build This Idea -->
+                <div class="card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 0.5rem; border-radius: 8px;">
+                            🚀
+                        </div>
+                        <h3 style="margin: 0;">이 아이디어 구축하기</h3>
+                    </div>
+                    <p style="color: #666; font-size: 0.875rem; margin-bottom: 1.5rem;">
+                        이 아이디어의 연구를 가져가서 구축을 시작하세요. 시장 인사이트, 
+                        고객 이해, 전략적 맥락을 결합한 완벽하게 제작된 프롬프트를 받으세요.
+                    </p>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 1rem;">
+                        🚀 아이디어 빌더로 이동
+                    </a>
+                    <div style="text-align: center; font-size: 0.75rem; color: #666;">
+                        <span>호환 도구:</span>
+                        <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;">
+                            <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.625rem;">Webflow</span>
+                            <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.625rem;">Figma</span>
+                            <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.625rem;">Notion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Idea Actions -->
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">아이디어 액션</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="#" style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; border-radius: 8px; text-decoration: none; color: #1a1a1a; transition: background 0.2s;">
+                            <div style="background: #e3f2fd; padding: 0.5rem; border-radius: 6px;">📥</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.875rem;">데이터 다운로드</div>
+                                <div style="font-size: 0.75rem; color: #666;">모든 연구 및 분석 내보내기</div>
+                            </div>
+                        </a>
+                        <a href="#" style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; border-radius: 8px; text-decoration: none; color: #1a1a1a; transition: background 0.2s;">
+                            <div style="background: #e3f2fd; padding: 0.5rem; border-radius: 6px;">🎯</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.875rem;">창업자 적합성</div>
+                                <div style="font-size: 0.75rem; color: #666;">이 아이디어와의 정렬도 평가</div>
+                            </div>
+                        </a>
+                        <a href="#" style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; border-radius: 8px; text-decoration: none; color: #1a1a1a; transition: background 0.2s;">
+                            <div style="background: #e3f2fd; padding: 0.5rem; border-radius: 6px;">💬</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.875rem;">AI 채팅</div>
+                                <div style="font-size: 0.75rem; color: #666;">AI와 이 아이디어에 대해 논의</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     {% else %}

@@ -80,8 +80,27 @@ const modalTitle = document.getElementById('modal-title');
 const modalBody = document.getElementById('modal-body');
 const closeBtn = document.getElementsByClassName('close')[0];
 
+// Function to get today's date in KST format
+function getTodayKST() {
+    const now = new Date();
+    const kstOffset = 9 * 60; // KST is UTC+9
+    const kst = new Date(now.getTime() + (kstOffset * 60 * 1000));
+    
+    const year = kst.getFullYear();
+    const month = kst.getMonth() + 1;
+    const day = kst.getDate();
+    
+    return `${year}년 ${month}월 ${day}일`;
+}
+
 // Add click event listeners to metrics
 document.addEventListener('DOMContentLoaded', function() {
+    // Update date to today's KST
+    const dateElement = document.querySelector('.date');
+    if (dateElement) {
+        dateElement.textContent = getTodayKST();
+    }
+    
     const metrics = document.querySelectorAll('.metric');
     
     metrics.forEach(metric => {

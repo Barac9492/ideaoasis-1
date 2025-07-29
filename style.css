@@ -301,6 +301,68 @@ body {
     line-height: 1.6;
 }
 
+/* About page styles */
+.about-content {
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #222;
+    margin: 2rem 0 1rem 0;
+    font-weight: 400;
+}
+
+.about-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.criteria-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.criteria-item {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.criteria-item h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.criteria-item p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact-info {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
     .header,
@@ -340,5 +402,18 @@ body {
         margin: 10% auto;
         padding: 1.5rem;
         width: 95%;
+    }
+    
+    .criteria-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .criteria-item {
+        padding: 1rem;
+    }
+    
+    .contact-info {
+        padding: 1.5rem;
     }
 }

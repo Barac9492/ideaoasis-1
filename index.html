@@ -1,82 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IdeaOasis</title>
+    <title>아이디어 오아시스</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="/" class="site-name">IdeaOasis</a>
+            <a href="/" class="site-name">아이디어 오아시스</a>
             <div class="nav-links">
-                <a href="/archive" class="nav-link">ARCHIVE</a>
-                <a href="/about" class="nav-link">ABOUT</a>
+                <a href="/archive" class="nav-link">아카이브</a>
+                <a href="/about" class="nav-link">소개</a>
+                <a href="/admin" class="nav-link">관리자</a>
             </div>
         </nav>
     </header>
 
     <main class="main">
         <section class="hero">
-            <h1 class="title">One Business Idea, Every Day</h1>
-            <p class="subtitle">ACTIONABLE OPPORTUNITIES FOR WANNABE ENTREPRENEURS</p>
+            <h1 class="title">매일 하나의 비즈니스 아이디어</h1>
+            <p class="subtitle">예비 창업가를 위한 실행 가능한 기회</p>
         </section>
 
         <section class="idea-card">
             <div class="card">
                 <div class="meta">
-                    <span class="date">DECEMBER 28, 2024</span>
-                    <span class="country">[US]</span>
+                    <span class="date">2024년 12월 28일</span>
+                    <span class="country">[KR]</span>
                 </div>
-                <h3 class="idea-title">AI-Powered Local Service Marketplace</h3>
+                <h3 class="idea-title">AI 기반 지역 서비스 마켓플레이스</h3>
                 <p class="idea-text">
-                    Create a hyperlocal platform connecting homeowners with verified service providers (plumbers, electricians, cleaners) using AI to match based on availability, pricing, and past performance. Think TaskRabbit meets Uber's efficiency.
+                    집주인과 검증된 서비스 제공업체(배관공, 전기기사, 청소업체)를 AI로 연결하는 하이퍼로컬 플랫폼을 만들어보세요. 가용성, 가격, 과거 실적을 기반으로 매칭합니다. TaskRabbit의 기능과 Uber의 효율성을 결합한 서비스입니다.
                 </p>
                 
                 <div class="metrics">
-                    <div class="metric">
-                        <span class="metric-label">Market Size</span>
+                    <div class="metric" data-metric="market">
+                        <span class="metric-label">시장 규모</span>
                         <div class="metric-value">
                             <span class="score high">8/10</span>
-                            <span class="description">$400B+ home services market</span>
+                            <span class="description">4000억 달러+ 홈서비스 시장</span>
                         </div>
                     </div>
-                    <div class="metric">
-                        <span class="metric-label">Competition</span>
+                    <div class="metric" data-metric="competition">
+                        <span class="metric-label">경쟁 강도</span>
                         <div class="metric-value">
                             <span class="score medium">6/10</span>
-                            <span class="description">Fragmented market, local gaps</span>
+                            <span class="description">분산된 시장, 지역별 격차</span>
                         </div>
                     </div>
-                    <div class="metric">
-                        <span class="metric-label">Execution</span>
+                    <div class="metric" data-metric="execution">
+                        <span class="metric-label">실행 난이도</span>
                         <div class="metric-value">
                             <span class="score medium">5/10</span>
-                            <span class="description">Moderate tech complexity</span>
+                            <span class="description">중간 수준의 기술 복잡도</span>
                         </div>
                     </div>
-                    <div class="metric">
-                        <span class="metric-label">Timing</span>
+                    <div class="metric" data-metric="timing">
+                        <span class="metric-label">시기</span>
                         <div class="metric-value">
                             <span class="score high">9/10</span>
-                            <span class="description">AI adoption accelerating</span>
+                            <span class="description">AI 도입 가속화</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="action-note">
-                    <strong>First Step:</strong> Survey 50 homeowners in your area about their biggest service pain points this week.
+                    <strong>첫 번째 단계:</strong> 이번 주에 당신 지역의 집주인 50명에게 가장 큰 서비스 문제점에 대해 설문조사를 실시하세요.
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Metric Detail Modal -->
+    <div id="metric-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-title"></h3>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
     <footer class="footer">
-        <p>&copy; 2024 IdeaOasis. One opportunity at a time.</p>
+        <p>&copy; 2024 아이디어 오아시스. 하나씩, 기회를 만들어가다.</p>
     </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>

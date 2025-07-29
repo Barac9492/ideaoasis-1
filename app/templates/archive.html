@@ -19,9 +19,9 @@
         </div>
 
         <!-- Ideas Grid -->
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem;">
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
             {% for idea in ideas %}
-            <div class="card" style="padding: 2rem;">
+            <div class="idea-card">
                 {% if demo_mode %}
                     <div class="demo-badge">DEMO MODE</div>
                 {% endif %}
@@ -34,9 +34,9 @@
                             <p style="margin-bottom: 0;">출처: {{ idea.source_type.upper() }}</p>
                         </div>
                         <div class="tags">
-                            <span class="tag">{{ idea.source_type.upper() }}</span>
+                            <span class="tag primary">{{ idea.source_type.upper() }}</span>
                             {% if idea.category %}
-                            <span class="tag">{{ idea.category.upper() }}</span>
+                            <span class="tag success">{{ idea.category.upper() }}</span>
                             {% endif %}
                         </div>
                     </div>
@@ -46,19 +46,17 @@
                 <h3 style="margin-bottom: 1rem;">{{ idea.idea_title }}</h3>
 
                 <!-- Idea Preview -->
-                <div style="margin-bottom: 1.5rem;">
-                    <p style="color: #2c2c2c; font-size: 1rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">
-                        {{ idea.summary_kr[:300] }}...
-                    </p>
+                <div class="idea-preview">
+                    {{ idea.summary_kr[:300] }}...
                 </div>
 
                 <!-- Action Buttons -->
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
                     <a 
                         href="{{ idea.source_url }}" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        class="btn"
+                        class="btn btn-secondary"
                         style="padding: 0.5rem 1rem; font-size: 0.875rem;"
                     >
                         <span>원문 보기</span>
@@ -106,7 +104,7 @@
                 </a>
                 <button 
                     onclick="location.reload()"
-                    class="btn"
+                    class="btn btn-secondary"
                 >
                     새로고침
                 </button>

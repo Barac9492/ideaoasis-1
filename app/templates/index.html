@@ -26,9 +26,9 @@
                         <p style="margin-bottom: 0;">출처: {{ idea.source_type.upper() }}</p>
                     </div>
                     <div class="tags">
-                        <span class="tag">{{ idea.source_type.upper() }}</span>
+                        <span class="tag primary">{{ idea.source_type.upper() }}</span>
                         {% if idea.category %}
-                        <span class="tag">{{ idea.category.upper() }}</span>
+                        <span class="tag success">{{ idea.category.upper() }}</span>
                         {% endif %}
                     </div>
                 </div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0;">
                 <div class="vote-buttons">
                     <button 
                         onclick="vote({{ idea.id }}, 'up')"
@@ -78,7 +78,7 @@
         </div>
 
         <!-- Info Box -->
-        <div class="card" style="background: #f8f8f8; border: 1px solid #e0e0e0;">
+        <div class="card" style="background: #f8f9fa; border: 1px solid rgba(0, 0, 0, 0.06);">
             <h3>이 아이디어에 대해</h3>
             <p style="margin-bottom: 0;">
                 이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
@@ -100,7 +100,7 @@
                 </a>
                 <button 
                     onclick="location.reload()"
-                    class="btn"
+                    class="btn btn-secondary"
                 >
                     새로고침
                 </button>

@@ -1,0 +1,169 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Layout container */
+.header,
+.main,
+.footer {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header and navigation */
+.header {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.nav-link:hover {
+    color: #333;
+}
+
+/* Hero section */
+.hero {
+    text-align: center;
+    margin: 4rem 0 6rem 0;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #222;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: 400;
+}
+
+/* Idea card */
+.idea-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6rem;
+}
+
+.card {
+    background: white;
+    padding: 3rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    max-width: 600px;
+    text-align: center;
+}
+
+.meta {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.date {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 400;
+}
+
+.country {
+    font-size: 0.7rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.idea-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 300;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem 0 4rem 0;
+    border-top: 1px solid #eee;
+    margin-top: 4rem;
+}
+
+.footer p {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 300;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .header,
+    .main,
+    .footer {
+        padding: 0 1.5rem;
+    }
+    
+    .title {
+        font-size: 2.2rem;
+    }
+    
+    .card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+    
+    .meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

@@ -18,27 +18,24 @@
                 <div class="demo-badge">DEMO MODE</div>
             {% endif %}
             
-            <!-- Idea Header -->
-            <div style="margin-bottom: 32px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <!-- Meta Information -->
+            <div class="meta">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <h2 style="font-size: 32px; margin-bottom: 8px; color: #1d1d1f;">{{ idea.idea_title }}</h2>
-                        <p style="color: #86868b; font-size: 17px;">
-                            {{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨
-                        </p>
+                        <p style="margin-bottom: 0.5rem;">{{ idea.published_at.strftime('%Y년 %m월 %d일') }}에 발굴됨</p>
+                        <p style="margin-bottom: 0;">출처: {{ idea.source_type.upper() }}</p>
                     </div>
-                    <div style="display: flex; gap: 8px;">
-                        <span style="padding: 6px 12px; background: #007aff; color: white; border-radius: 12px; font-size: 12px; font-weight: 500;">
-                            {{ idea.source_type.upper() }}
-                        </span>
+                    <div class="tags">
+                        <span class="tag">{{ idea.source_type.upper() }}</span>
                         {% if idea.category %}
-                        <span style="padding: 6px 12px; background: #34c759; color: white; border-radius: 12px; font-size: 12px; font-weight: 500;">
-                            {{ idea.category.upper() }}
-                        </span>
+                        <span class="tag">{{ idea.category.upper() }}</span>
                         {% endif %}
                     </div>
                 </div>
             </div>
+
+            <!-- Idea Title -->
+            <h2>{{ idea.idea_title }}</h2>
 
             <!-- Idea Content -->
             <div class="idea-content">
@@ -46,7 +43,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
                 <div class="vote-buttons">
                     <button 
                         onclick="vote({{ idea.id }}, 'up')"
@@ -81,43 +78,29 @@
         </div>
 
         <!-- Info Box -->
-        <div class="card" style="background: #f5f5f7; border: 1px solid rgba(0, 0, 0, 0.1);">
-            <div style="display: flex; align-items: flex-start; gap: 16px;">
-                <div style="flex-shrink: 0;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 20px; margin-bottom: 8px; color: #1d1d1f;">이 아이디어에 대해</h3>
-                    <p style="color: #86868b; font-size: 17px; line-height: 1.5;">
-                        이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
-                        한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
-                    </p>
-                </div>
-            </div>
+        <div class="card" style="background: #f8f8f8; border: 1px solid #e0e0e0;">
+            <h3>이 아이디어에 대해</h3>
+            <p style="margin-bottom: 0;">
+                이 아이디어는 ideabrowser.com의 프레임워크를 참고하여 해외 커뮤니티에서 수집되어 AI를 통해 한국어로 번역 및 요약되었습니다. 
+                한국 시장에서의 적용 가능성을 고려하여 선별되었으며, 창업자들이 참고할 수 있도록 구성되었습니다.
+            </p>
         </div>
 
     {% else %}
         <!-- No Idea Available -->
-        <div class="card" style="text-align: center; padding: 80px 40px;">
-            <div style="margin-bottom: 32px;">
-                <span style="font-size: 64px;">🤔</span>
-            </div>
-            <h2 style="font-size: 32px; margin-bottom: 16px; color: #1d1d1f;">오늘의 아이디어가 아직 준비되지 않았습니다</h2>
-            <p style="color: #86868b; font-size: 18px; margin-bottom: 32px; line-height: 1.6;">
+        <div class="card" style="text-align: center; padding: 4rem 2rem;">
+            <h2 style="margin-bottom: 2rem;">오늘의 아이디어가 아직 준비되지 않았습니다</h2>
+            <p style="margin-bottom: 3rem;">
                 매일 오전 6시에 새로운 아이디어가 업데이트됩니다.<br>
                 잠시 후 다시 확인해보세요.
             </p>
-            <div style="display: flex; justify-content: center; gap: 16px;">
+            <div style="display: flex; justify-content: center; gap: 1rem;">
                 <a href="/archive" class="btn btn-primary">
                     과거 아이디어 보기
                 </a>
                 <button 
                     onclick="location.reload()"
-                    class="btn btn-secondary"
+                    class="btn"
                 >
                     새로고침
                 </button>
@@ -128,9 +111,9 @@
     <!-- Features Section -->
     <section class="features">
         <div class="features-container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 40px; margin-bottom: 16px; color: #1d1d1f;">왜 IdeaOasis인가요?</h2>
-                <p style="color: #86868b; font-size: 18px; max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="margin-bottom: 1rem;">왜 IdeaOasis인가요?</h2>
+                <p style="max-width: 600px; margin: 0 auto;">
                     한국 창업자들을 위해 특별히 설계된 아이디어 발굴 플랫폼
                 </p>
             </div>
@@ -164,12 +147,12 @@
     </section>
 
     <!-- Call to Action -->
-    <div class="card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-        <h2 style="font-size: 32px; margin-bottom: 16px;">창업 아이디어를 찾고 계신가요?</h2>
-        <p style="font-size: 18px; margin-bottom: 32px; opacity: 0.9;">
+    <div class="cta">
+        <h2>창업 아이디어를 찾고 계신가요?</h2>
+        <p>
             매일 새로운 해외 아이디어로 창업 영감을 얻어보세요
         </p>
-        <a href="/archive" class="btn" style="background: white; color: #1d1d1f; font-weight: 600;">
+        <a href="/archive" class="btn">
             아카이브 둘러보기
         </a>
     </div>
